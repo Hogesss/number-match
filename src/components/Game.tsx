@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const Title = styled.div`
+const Content = styled.div`
   padding: 10px;
 `;
 
 function Game() {
-  return <Title>Game</Title>;
+  return <Content>Game goes here</Content>;
 }
 
 export default Game;
