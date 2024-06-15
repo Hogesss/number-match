@@ -1,4 +1,4 @@
-# Getting Started with Matching Number Game
+# Getting Started with my Matching Number Game
 
 Made by Ben Hogan
 
@@ -9,6 +9,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+### `npm install`
+
+Installs the dependencies needed for the project.
 
 ### `npm start`
 
