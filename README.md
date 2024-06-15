@@ -2,6 +2,8 @@
 
 Made by Ben Hogan
 
+Simple matching number game in react. Utilises packages like react router, react hook forms, zod validation and styled components to create a simple UI.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
