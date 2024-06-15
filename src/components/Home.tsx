@@ -14,9 +14,10 @@ const Content = styled.div`
   gap: 10px;
 `;
 
-const ErrorMessage = styled.div`
+const ErrorMessage = styled.span`
   size: 8px;
   color: red;
+  margin-left: 8px;
 `;
 
 const FormSchema = () =>
@@ -24,7 +25,7 @@ const FormSchema = () =>
     cards: z.coerce.number().min(2),
   });
 
-export type FormSchemaType = z.infer<ReturnType<typeof FormSchema>>;
+type FormSchemaType = z.infer<ReturnType<typeof FormSchema>>;
 
 function Home() {
   const navigate = useNavigate();
@@ -44,23 +45,21 @@ function Home() {
   };
 
   return (
-    <>
-      Welcome!!
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Content>
-          <div>
-            Please enter the number of cards you would like to play with:
-          </div>
-          <div>
-            <input type="text" {...register("cards")} />
-            {errors.cards && (
-              <ErrorMessage>{errors.cards.message}</ErrorMessage>
-            )}
-          </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Content>
+        <span>
+          Enter a number to set the highest card value. We'll create a deck with
+          cards numbered from 1 up to your chosen number:
+        </span>
+        <div>
+          <input type="text" {...register("cards")} />
+          {errors.cards && <ErrorMessage>{errors.cards.message}</ErrorMessage>}
+        </div>
+        <div>
           <Button>Begin</Button>
-        </Content>
-      </form>
-    </>
+        </div>
+      </Content>
+    </form>
   );
 }
 

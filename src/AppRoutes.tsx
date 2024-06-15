@@ -14,6 +14,7 @@ export default function AppRoutes(): JSX.Element {
       <Route element={<AppLayout />} errorElement={<div>Error</div>}>
         <Route path="/" element={<Home />} />
         <Route path="/game" element={<Game />} />
+        <Route path="/winner" element={<Game />} />
       </Route>
     )
   );
