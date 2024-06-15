@@ -7,14 +7,15 @@ import {
 import AppLayout from "./AppLayout";
 import Game from "./components/Game";
 import Home from "./components/Home";
+import GameOver from "./components/GameOver";
 
 export default function AppRoutes(): JSX.Element {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<AppLayout />} errorElement={<div>Error</div>}>
-        <Route path="/" element={<Home />} />
+      <Route element={<AppLayout />}>
+        <Route path="*" element={<Home />} />
         <Route path="/game" element={<Game />} />
-        <Route path="/winner" element={<Game />} />
+        <Route path="/winner" element={<GameOver />} />
       </Route>
     )
   );

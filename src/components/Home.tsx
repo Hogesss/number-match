@@ -65,13 +65,11 @@ function Home() {
           Enter a number to set the highest card value. We'll create a deck with
           cards numbered from 1 up to your chosen number:
         </span>
-        <div>
-          <StyledInput type="text" defaultValue="5" {...register("cards")} />
-          {errors.cards && <ErrorMessage>{errors.cards.message}</ErrorMessage>}
-        </div>
-        <div>
-          <Button>Begin</Button>
-        </div>
+
+        <StyledInput type="text" defaultValue="5" {...register("cards")} />
+        {errors.cards && <ErrorMessage>{errors.cards.message}</ErrorMessage>}
+
+        <Button>Begin</Button>
       </Content>
     </form>
   );

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Card from "./Card";
 import Button from "./Button";
 
-const ScoreBoard = styled.div`
+const ScoreBoard = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,7 +21,7 @@ const Content = styled.div`
   overflow: auto;
 `;
 
-const Text = styled.div`
+const Text = styled.span`
   font-size: 24px;
   font-weight: 500;
 `;
@@ -76,10 +76,13 @@ function Game() {
     setCards(shuffledCards);
   };
 
-  const checkGameEnd = () => {
-    // TODO: check logic here for game win
+  const checkGameEnd = (finalScore: Number) => {
     if (!cards?.find((card) => card.hidden === true)) {
-      console.log("you won");
+      localStorage.setItem("score", finalScore.toString());
+
+      setTimeout(() => {
+        navigate("/winner");
+      }, 1000);
     }
   };
 
@@ -87,10 +90,19 @@ function Game() {
     // if the card is already revealed, return
     if (!card.hidden || loading) return;
 
-    card.hidden = false;
-    setScore(score + 1);
+    const newScore = score + 1;
 
-    if (revealedCard && revealedCard.value !== card.value) {
+    card.hidden = false;
+    setScore(newScore);
+
+    // set the first revealed card
+    if (!revealedCard) {
+      setRevealedCard(card);
+      return;
+    }
+
+    // unsuccessful match, reset
+    if (revealedCard.value !== card.value) {
       setLoading(true);
 
       setTimeout(() => {
@@ -103,23 +115,18 @@ function Game() {
       return;
     }
 
-    if (revealedCard && revealedCard.value === card.value) {
+    // the match was successful
+    if (revealedCard.value === card.value) {
       setRevealedCard(undefined);
-      return;
-    }
 
-    if (!revealedCard) {
-      setRevealedCard(card);
+      // check if all cards have been turned
+      checkGameEnd(newScore);
     }
   };
 
   useEffect(() => {
     setupGame();
   }, []);
-
-  useEffect(() => {
-    checkGameEnd();
-  }, [score]);
 
   if (!cards) {
     return <div>Loading...</div>;
@@ -129,8 +136,8 @@ function Game() {
     <>
       <ScoreBoard>
         <Button onClick={() => navigate("/")}>Restart</Button>
-        <Text>Number of cards: {searchParams.get("cards")}</Text>
         <Text>Score: {score}</Text>
+        <Text>Highest card: {searchParams.get("cards")}</Text>
       </ScoreBoard>
       <Text>Match all the cards to win!</Text>
       <Content>

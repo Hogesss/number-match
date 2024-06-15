@@ -1,37 +1,25 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-type CardVariant = {
-  variant: "hidden" | "revealed";
-};
+const StyledCard = styled.div<{ variant: string }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-const CardStyles = css<CardVariant>`
   padding: 10px;
   font-size: 64px;
   height: 200px;
   width: 140px;
   border: 1px solid black;
   border-radius: 4px;
-  background-color: #373a40;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: ${(props) =>
+    props.variant === "hidden" ? "#dc5f00" : "#373a40"};
 
   &:hover {
     opacity: 80%;
     cursor: pointer;
   }
-
-  ${(props) =>
-    props.variant === "hidden" &&
-    css`
-      background-color: #dc5f00;
-    `}
-`;
-
-const StyledCard = styled.div<CardVariant>`
-  ${CardStyles}
 `;
 
 type CardProps = {
