@@ -11,10 +11,10 @@ const Layout = styled.div`
 
   height: 100%;
   padding: 24px;
-  margin: 24px;
+  background: #1f1f1f;
 
-  border-radius: 8px;
-  background: #686d76;
+  /* margin: 24px;
+  border-radius: 8px; */
 `;
 
 function AppLayout() {

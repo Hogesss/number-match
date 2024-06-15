@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { number } from "zod";
 import Card from "./Card";
 import Button from "./Button";
 
 const ScoreBoard = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 4px;
   padding-bottom: 24px;
 `;
 
 const Content = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 4px;
   flex-wrap: wrap;
   overflow: auto;
 `;
 
-const Text = styled.text`
+const Text = styled.div`
   font-size: 24px;
   font-weight: 500;
 `;
@@ -74,7 +76,12 @@ function Game() {
     setCards(shuffledCards);
   };
 
-  const checkGameEnd = () => {};
+  const checkGameEnd = () => {
+    // TODO: check logic here for game win
+    if (!cards?.find((card) => card.hidden === true)) {
+      console.log("you won");
+    }
+  };
 
   const onCardClick = (card: CardDetail) => {
     // if the card is already revealed, return
@@ -127,8 +134,12 @@ function Game() {
       </ScoreBoard>
       <Text>Match all the cards to win!</Text>
       <Content>
-        {cards?.map((card) => (
-          <Card onClick={() => onCardClick(card)} hidden={card.hidden}>
+        {cards?.map((card, index) => (
+          <Card
+            key={index}
+            onClick={() => onCardClick(card)}
+            hidden={card.hidden}
+          >
             {card.value}
           </Card>
         ))}

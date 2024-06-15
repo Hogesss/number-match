@@ -7,17 +7,31 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const Content = styled.div`
+  margin-top: 32px;
+  font-size: 24px;
+
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  text-align: left;
   gap: 10px;
+  width: 100%;
 `;
 
 const ErrorMessage = styled.span`
   size: 8px;
   color: red;
   margin-left: 8px;
+`;
+
+const StyledInput = styled.input`
+  font-size: 32px;
+  height: 64px;
+  background-color: #373a40;
+  color: white;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 4px;
 `;
 
 const FormSchema = () =>
@@ -52,7 +66,7 @@ function Home() {
           cards numbered from 1 up to your chosen number:
         </span>
         <div>
-          <input type="text" {...register("cards")} />
+          <StyledInput type="text" defaultValue="5" {...register("cards")} />
           {errors.cards && <ErrorMessage>{errors.cards.message}</ErrorMessage>}
         </div>
         <div>

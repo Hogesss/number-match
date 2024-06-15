@@ -27,7 +27,6 @@ const CardStyles = css<CardVariant>`
     props.variant === "hidden" &&
     css`
       background-color: #dc5f00;
-      color: black;
     `}
 `;
 
